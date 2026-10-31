@@ -1,0 +1,258 @@
+/*
+ * 궤도 졸업전시 — 디자인 시스템 토큰
+ * 원본: https://claude.ai/artifact/5ZceCav1EfEDnMD7S3szgz (project/tokens.json)
+ * 값을 바꿀 때는 디자인 시스템을 먼저 고치고 여기에 옮긴다.
+ *
+ * 1. 테마 값      :root(크림), [data-theme="black"]
+ * 2. 모바일 값    @media (max-width: 700px)
+ * 3. Tailwind 연결 @theme inline
+ */
+
+/* ---------- 1. 테마 값 ---------- */
+
+:root {
+  color-scheme: light;
+
+  /* 바탕과 글자 */
+  --paper: #E9E4DC;
+  --paper-2: #DDD7CD;
+  --night: #18151B;
+  --ink: #2A2228;
+  --ink-dim: #6B6169;
+  --line: rgba(42, 34, 40, 0.18);
+  --grid-mark: rgba(42, 34, 40, 0.18);
+  --axis: rgba(42, 34, 40, 0.35);
+  --crop: rgba(42, 34, 40, 0.6);
+  --night-ink: #ECE6E1;
+  --night-dim: #9C929A;
+  --nav-current: #FFC37A;
+  --signal: #CE342C;
+
+  /* 궤도 띠 */
+  --band-warm: #D1906E;
+  --band-warm-back: #F8E4D0;
+  --band-warm-edge: #924E3A;
+  --band-deep: #3E2C6A;
+  --band-deep-back: #624282;
+  --band-deep-edge: #22183A;
+  --band-line: var(--ink);
+  --band-line-back: #8C8088;
+  --planet: #F0A868;
+
+  /* 빛 */
+  --light-core: #FFF6EA;
+  --light-mid: #FAC682;
+  --light-edge: #F29650;
+  --light-point: #FFFFFF;
+  --light-halo: rgba(255, 244, 225, 0.7);
+  --light-fade: rgba(255, 230, 200, 0);
+  --light-glow: rgba(255, 214, 160, 0.5);
+  --light-flare: rgba(255, 248, 236, 0.9);
+  --light-ring: rgba(255, 250, 242, 0.85);
+  --ring-dash: rgba(110, 70, 60, 0.5);
+
+  /* 캔버스 바탕(홈 전용): 클래스로 만들지 않고 캔버스가 직접 읽는다 */
+  --atmo-peach: rgba(236, 172, 132, 0.7);
+  --atmo-orange: rgba(242, 158, 88, 0.75);
+  --atmo-core: rgba(250, 198, 130, 0.9);
+  --atmo-deep: rgba(62, 44, 106, 0.88);
+  --atmo-deep-2: rgba(98, 66, 130, 0.6);
+  --halftone-light: rgba(255, 240, 226, 0.75);
+  --halftone-dark: rgba(146, 78, 58, 0.4);
+  --grain-dark: rgba(0, 0, 0, 0.18);
+  --grain-light: rgba(255, 255, 255, 0.3);
+  --plan-line: #F4EEE6;
+
+  /* 선 두께: Tailwind에 해당 칸이 없어 변수로만 둔다. border-(length:--stroke-crop) */
+  --stroke-hair: 1px;
+  --stroke-crop: 1.5px;
+  --stroke-band-edge: 0.6px;
+  --stroke-planet: 0.8px;
+}
+
+[data-theme="black"] {
+  color-scheme: dark;
+
+  --paper: #18151B;
+  --paper-2: #24202A;
+  --night: #0F0D12;
+  --ink: #ECE6E1;
+  --ink-dim: #9C929A;
+  --line: rgba(236, 230, 225, 0.16);
+  --grid-mark: rgba(236, 230, 225, 0.18);
+  --axis: rgba(236, 230, 225, 0.35);
+  --crop: rgba(236, 230, 225, 0.6);
+  --signal: #E8553F;
+
+  --band-warm: #E29C74;
+  --band-warm-back: #76483A;
+  --band-warm-edge: #F6C49C;
+  --band-deep: #7C64C4;
+  --band-deep-back: #463680;
+  --band-deep-edge: #C4B2EC;
+  --band-line: var(--ink);
+  --band-line-back: #968C94;
+  --planet: #F4B070;
+
+  --ring-dash: rgba(236, 172, 132, 0.45);
+
+  --atmo-peach: rgba(236, 150, 112, 0.42);
+  --atmo-orange: rgba(242, 150, 80, 0.5);
+  --atmo-core: rgba(250, 198, 130, 0.82);
+  --atmo-deep: rgba(82, 60, 160, 0.62);
+  --atmo-deep-2: rgba(120, 88, 188, 0.42);
+  --halftone-light: rgba(255, 240, 226, 0.5);
+  --halftone-dark: rgba(226, 150, 110, 0.42);
+  --grain-dark: rgba(0, 0, 0, 0.3);
+  --grain-light: rgba(255, 255, 255, 0.2);
+  --plan-line: #ECE6E1;
+}
+
+/* ---------- 2. 글자 크기와 여백: 데스크톱 / 모바일(≤700px) ----------
+ * 디자인 시스템의 *-m 스타일은 별도 클래스가 아니라, 같은 클래스의 모바일 값이다. */
+
+:root {
+  --type-display-record-size: 44px;
+  --type-display-record-leading: 1.1;
+  --type-display-statement-size: 40px;
+  --type-display-section-size: 30px;
+
+  --page-x: 72px;     /* space-6 */
+  --section-y: 120px; /* space-7 */
+}
+
+@media (max-width: 700px) {
+  :root {
+    --type-display-record-size: 32px;       /* display-record-m */
+    --type-display-record-leading: 1.15;
+    --type-display-statement-size: 26px;    /* display-statement-m */
+    --type-display-section-size: 24px;      /* display-section-m */
+
+    --page-x: 20px;     /* gutter-mobile */
+    --section-y: 72px;  /* space-6 */
+  }
+}
+
+/* ---------- 3. Tailwind 연결 ----------
+ * 기본값을 initial로 지워서, 디자인 시스템에 없는 색·크기·간격은 클래스가 만들어지지 않게 한다. */
+
+@theme inline {
+  /* 색: bg-paper, text-ink, border-line, … */
+  --color-*: initial;
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-night: var(--night);
+  --color-ink: var(--ink);
+  --color-ink-dim: var(--ink-dim);
+  --color-line: var(--line);
+  --color-grid-mark: var(--grid-mark);
+  --color-axis: var(--axis);
+  --color-crop: var(--crop);
+  --color-night-ink: var(--night-ink);
+  --color-night-dim: var(--night-dim);
+  --color-nav-current: var(--nav-current);
+  --color-signal: var(--signal);
+  --color-band-warm: var(--band-warm);
+  --color-band-warm-back: var(--band-warm-back);
+  --color-band-warm-edge: var(--band-warm-edge);
+  --color-band-deep: var(--band-deep);
+  --color-band-deep-back: var(--band-deep-back);
+  --color-band-deep-edge: var(--band-deep-edge);
+  --color-band-line: var(--band-line);
+  --color-band-line-back: var(--band-line-back);
+  --color-planet: var(--planet);
+
+  /* 글꼴 */
+  --font-*: initial;
+  --font-sans: "Instrument Sans", "Pretendard", -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* 글자 스타일: 크기 + 행간 + 자간 + 굵기. mono-* 는 font-mono와 같이 쓴다. */
+  --text-*: initial;
+
+  --text-display-record: var(--type-display-record-size);
+  --text-display-record--line-height: var(--type-display-record-leading);
+  --text-display-record--letter-spacing: -0.02em;
+  --text-display-record--font-weight: 500;
+
+  --text-display-statement: var(--type-display-statement-size);
+  --text-display-statement--line-height: 1.3;
+  --text-display-statement--letter-spacing: -0.02em;
+  --text-display-statement--font-weight: 500;
+
+  --text-display-section: var(--type-display-section-size);
+  --text-display-section--line-height: 1.35;
+  --text-display-section--letter-spacing: -0.02em;
+  --text-display-section--font-weight: 500;
+
+  --text-heading: 22px;
+  --text-heading--line-height: 1.3;
+  --text-heading--font-weight: 500;
+
+  --text-title: 15px;
+  --text-title--line-height: 1.4;
+  --text-title--font-weight: 500;
+
+  --text-label: 13px;
+  --text-label--line-height: 1.3;
+  --text-label--font-weight: 500;
+
+  --text-body: 14px;
+  --text-body--line-height: 2;
+  --text-body--font-weight: 400;
+
+  --text-body-list: 14px;
+  --text-body-list--line-height: 1.8;
+  --text-body-list--font-weight: 400;
+
+  --text-body-s: 13px;
+  --text-body-s--line-height: 1.8;
+  --text-body-s--font-weight: 400;
+
+  --text-caption: 12px;
+  --text-caption--line-height: 1.7;
+  --text-caption--font-weight: 400;
+
+  --text-nav: 12px;
+  --text-nav--line-height: 1.2;
+  --text-nav--letter-spacing: 0.04em;
+  --text-nav--font-weight: 500;
+
+  --text-mono-label: 11px;
+  --text-mono-label--line-height: 1.4;
+  --text-mono-label--letter-spacing: 0.04em;
+  --text-mono-label--font-weight: 400;
+
+  --text-mono-micro: 10px;
+  --text-mono-micro--line-height: 1.6;
+  --text-mono-micro--letter-spacing: 0.04em;
+  --text-mono-micro--font-weight: 400;
+
+  /* 간격: p-4 = space-4(40px). Tailwind의 4px 배수는 쓰지 않는다. */
+  --spacing-*: initial;
+  --spacing-0: 0px;
+  --spacing-1: 8px;
+  --spacing-2: 16px;
+  --spacing-3: 28px;
+  --spacing-4: 40px;
+  --spacing-5: 56px;
+  --spacing-6: 72px;
+  --spacing-7: 120px;
+  --spacing-gutter-mobile: 20px;
+  --spacing-grid-x: 80px;
+  --spacing-grid-y: 70px;
+  --spacing-nav-height: 52px;
+  --spacing-page-max: 1440px;
+  /* 화면 폭에 따라 바뀌는 여백: px-page-x, py-section-y */
+  --spacing-page-x: var(--page-x);
+  --spacing-section-y: var(--section-y);
+
+  /* 모서리: 행성, 빛, 메뉴 아래 호만 둥글다 */
+  --radius-*: initial;
+  --radius-none: 0;
+  --radius-round: 50%;
+
+  /* 중단점: Tailwind는 '이상' 기준이라 701px. tab: = 데스크톱(태블릿 포함), max-tab: = 모바일(≤700px) */
+  --breakpoint-*: initial;
+  --breakpoint-tab: 701px;
+}

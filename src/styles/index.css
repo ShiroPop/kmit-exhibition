@@ -1,0 +1,5 @@
+/* 글꼴은 index.html의 <link>로 불러온다(Instrument Sans, IBM Plex Mono, Pretendard). */
+@import "tailwindcss";
+@import "./theme.css";
+@import "./base.css";
+@import "./utilities.css";

@@ -1,0 +1,24 @@
+@layer base {
+  html,
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    word-break: keep-all; /* 어절을 지킨다 */
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  /* 빨강(signal)은 이탈과 키보드 포커스에만 */
+  :focus-visible {
+    outline: var(--stroke-hair) solid var(--signal);
+    outline-offset: 3px;
+  }
+
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+}

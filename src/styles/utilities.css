@@ -1,0 +1,83 @@
+/*
+ * 모든 페이지에 반복되는 바탕 표시. 색은 theme.css의 변수를 따르므로 두 테마에서 그대로 쓴다.
+ */
+
+/* + 격자: grid-x 80 × grid-y 70 간격, 8px 표시.
+ * 색을 SVG에 박지 않고 mask로 찍어서 --grid-mark를 따르게 한다.
+ * 내용을 가리지 않도록 ::before를 z-index -1에 두고, 요소에 isolation을 건다. */
+@utility grid-plus {
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-color: var(--grid-mark);
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='70'%3E%3Cpath d='M36 35h8M40 31v8' stroke='%23000'/%3E%3C/svg%3E") 0 0 / var(--spacing-grid-x) var(--spacing-grid-y) repeat;
+  }
+}
+
+/* 재단 표시: 네 모서리의 30px 꺾쇠. 요소 하나로 네 개를 그린다.
+ * 부모는 position: relative. 모서리에서 24px 안쪽(모바일 14px). */
+@utility crop-marks {
+  --crop-len: 30px;
+  --crop-gap: 24px;
+  position: absolute;
+  inset: var(--crop-gap);
+  pointer-events: none;
+  background:
+    linear-gradient(var(--crop), var(--crop)) left top / var(--crop-len) var(--stroke-crop) no-repeat,
+    linear-gradient(var(--crop), var(--crop)) left top / var(--stroke-crop) var(--crop-len) no-repeat,
+    linear-gradient(var(--crop), var(--crop)) right top / var(--crop-len) var(--stroke-crop) no-repeat,
+    linear-gradient(var(--crop), var(--crop)) right top / var(--stroke-crop) var(--crop-len) no-repeat,
+    linear-gradient(var(--crop), var(--crop)) left bottom / var(--crop-len) var(--stroke-crop) no-repeat,
+    linear-gradient(var(--crop), var(--crop)) left bottom / var(--stroke-crop) var(--crop-len) no-repeat,
+    linear-gradient(var(--crop), var(--crop)) right bottom / var(--crop-len) var(--stroke-crop) no-repeat,
+    linear-gradient(var(--crop), var(--crop)) right bottom / var(--stroke-crop) var(--crop-len) no-repeat;
+
+  @media (max-width: 700px) {
+    --crop-len: 18px;
+    --crop-gap: 14px;
+  }
+}
+
+/* 첫 섹션 가운데 세로 축. 다른 섹션에는 쓰지 않는다. 모바일에서는 없앤다. */
+@utility axis-center {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: var(--stroke-hair);
+    background: var(--axis);
+    pointer-events: none;
+  }
+
+  @media (max-width: 700px) {
+    &::before {
+      display: none;
+    }
+  }
+}
+
+/* 지금 보는 메뉴 아래의 둥근 호. 색은 글자색(currentColor)을 따른다: text-nav-current와 같이 쓴다. */
+@utility nav-arc {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: -6px;
+    right: -6px;
+    bottom: 6px;
+    height: 6px;
+    border-bottom: var(--stroke-hair) solid currentColor;
+    border-radius: 0 0 50% 50%;
+  }
+}
