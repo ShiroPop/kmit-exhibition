@@ -1,18 +1,18 @@
-import type { RefObject } from 'react'
-import { Link } from 'react-router'
+import type { RefObject } from "react";
+import { Link } from "react-router";
 
 export interface SubjectItem {
-  id: string
-  name: string
-  students: number
+  id: string;
+  name: string;
+  students: number;
 }
 
 interface Props {
-  items: SubjectItem[]
-  active: number
+  items: SubjectItem[];
+  active: number;
   /** 캔버스가 지시선을 그을 자리 */
-  anchors: RefObject<(HTMLElement | null)[]>
-  onPick: (i: number | null) => void
+  anchors: RefObject<(HTMLElement | null)[]>;
+  onPick: (i: number | null) => void;
 }
 
 /**
@@ -28,9 +28,11 @@ export function SubjectList({ items, active, anchors, onPick }: Props) {
       {items.map((s, i) => (
         <li key={s.id} className="col-span-full grid grid-cols-subgrid">
           <Link
-            ref={(el) => { anchors.current[i] = el }}
+            ref={(el) => {
+              anchors.current[i] = el;
+            }}
             to={`/works#s${s.id}`}
-            data-active={i === active ? '' : undefined}
+            data-active={i === active ? "" : undefined}
             onMouseEnter={() => onPick(i)}
             onFocus={() => onPick(i)}
             onMouseLeave={() => onPick(null)}
@@ -39,11 +41,18 @@ export function SubjectList({ items, active, anchors, onPick }: Props) {
           >
             <span className="size-1 rounded-round bg-current" />
             <span className="font-mono text-mono-micro">{s.id}</span>
-            <span>{s.name}</span>
-            <span className="invisible text-right font-mono text-mono-micro text-ink-dim group-data-active:visible">행성 {s.students}</span>
+            <span className="grid">
+              <span className="col-start-1 row-start-1">{s.name}</span>
+              <span aria-hidden="true" className="invisible col-start-1 row-start-1 font-semibold">
+                {s.name}
+              </span>
+            </span>
+            <span className="invisible text-right font-mono text-mono-micro text-ink-dim group-data-active:visible">
+              행성 {s.students}
+            </span>
           </Link>
         </li>
       ))}
     </ol>
-  )
+  );
 }
